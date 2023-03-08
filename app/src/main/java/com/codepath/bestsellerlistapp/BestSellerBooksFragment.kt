@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import okhttp3.Headers
 import org.json.JSONObject
+import java.io.IOException
 
 // --------------------------------//
 // CHANGE THIS TO BE YOUR API KEY  //
@@ -84,6 +85,7 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
                     }
                 }
         ]
+        Log.e("eor", "System should be completed")
     }
 
     override fun onItemClick(item: BestSellerBook) {
@@ -91,9 +93,3 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
         Toast.makeText(context, "test: " + item.title, Toast.LENGTH_LONG).show()
     }
 }
-
-    /*
-     * What happens when a particular book is clicked.
-     */
-    //override fun onItemClick(item: BestSellerBook) {
-        //Toast.makeText(context, "test: " + item.title, Toast.LENGTH_LONG).show()
