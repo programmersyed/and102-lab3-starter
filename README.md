@@ -31,7 +31,7 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-https://github.com/programmersyed/and102-lab3-starter/blob/main/Movie.gif
+![Movie](https://github.com/programmersyed/and102-lab3-starter/blob/main/Movie.gif)
 ![image](https://user-images.githubusercontent.com/92180502/224861066-4eb34f1c-f733-413e-8ca9-c1b0c3edf491.png)
 movie.gif
 
