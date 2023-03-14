@@ -57,7 +57,6 @@ class BestSellerBooksRecyclerViewAdapter(
         holder.mBookTitle.text = book.title
         holder.mBookAuthor.text = book.author
         holder.mBookDescription.text = book.description
-        holder.mBookRanking.text = book.rank.toString()
 
         holder.mView.setOnClickListener {
             holder.mItem?.let { book ->
@@ -67,7 +66,7 @@ class BestSellerBooksRecyclerViewAdapter(
 
 
         Glide.with(holder.mView)
-            .load(book.bookImageUrl)
+            .load("https://image.tmdb.org/t/p/w500/"+book.bookImageUrl)
             .centerInside()
             .into(holder.mBookImage)
 

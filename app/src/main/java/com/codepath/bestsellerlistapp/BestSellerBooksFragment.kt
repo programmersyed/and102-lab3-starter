@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
@@ -18,13 +20,14 @@ import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import okhttp3.Headers
+import org.json.JSONArray
 import org.json.JSONObject
-import java.io.IOException
+
 
 // --------------------------------//
 // CHANGE THIS TO BE YOUR API KEY  //
 // --------------------------------//
-private const val API_KEY = "rEUCZCbCJMYMlF3V1zmGtTmS8bfRNgxc"
+//private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
 /*
  * The class for the only fragment in the app, which contains the progress bar,
@@ -35,6 +38,7 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
     /*
      * Constructing the view
      */
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +47,7 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
         val progressBar = view.findViewById<View>(R.id.progress) as ContentLoadingProgressBar
         val recyclerView = view.findViewById<View>(R.id.list) as RecyclerView
         val context = view.context
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         updateAdapter(progressBar, recyclerView)
         return view
     }
@@ -53,16 +57,16 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
      * networking magic happens!
      */
     private fun updateAdapter(progressBar: ContentLoadingProgressBar, recyclerView: RecyclerView) {
-        progressBar.show()
+        progressBar.hide()
 
         // Create and set up an AsyncHTTPClient() here
         val client = AsyncHttpClient()
         val params = RequestParams()
-        params["api-key"] = API_KEY
+        //params["api-key"] = API_KEY
 
 // Using the client, perform the HTTP request
         client[
-                "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json",
+                "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
                 params,
                 object : JsonHttpResponseHandler(){
                     override fun onFailure(
@@ -75,12 +79,11 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
                     }
 
                     override fun onSuccess(statusCode: Int, headers: Headers?, json: JSON?) {
-                        Log.e("Yay, it worked", "Successful launch")
-                        val resultsJSON : JSONObject = json?.jsonObject?.get("results") as JSONObject
-                        val booksRawJSON : String = resultsJSON.get("books").toString()
+                        val resultsJSON = json!!.jsonObject["results"].toString()
                         val gson = Gson()
                         val arrayBookType = object : TypeToken<List<BestSellerBook>>() {}.type
-                        val models : List<BestSellerBook> = gson.fromJson(booksRawJSON, arrayBookType)
+                        val models : List<BestSellerBook> = gson.fromJson(resultsJSON, arrayBookType)
+                        Log.e("GENIOUS", resultsJSON.toString())
                         recyclerView.adapter = BestSellerBooksRecyclerViewAdapter(models, this@BestSellerBooksFragment)
                     }
                 }
@@ -93,3 +96,4 @@ class BestSellerBooksFragment : Fragment(), OnListFragmentInteractionListener {
         Toast.makeText(context, "test: " + item.title, Toast.LENGTH_LONG).show()
     }
 }
+
