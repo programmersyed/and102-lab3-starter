@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='![Movie](https://github.com/programmersyed/and102-lab3-starter/blob/main/Movie.gif)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/programmersyed/and102-lab3-starter/blob/main/Movie.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 movie.gif
 
